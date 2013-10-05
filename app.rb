@@ -16,7 +16,7 @@ get '/news/:id' do
 
   cache = S3Cache.new
 
-  freshen_if_older_than_ms = 60000
+  freshen_if_older_than_ms = CACHE_EXPIRE_AFTER_MS
 
   begin
     result = cache.get(object_id)
