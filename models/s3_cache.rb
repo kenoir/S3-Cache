@@ -14,6 +14,7 @@ class S3Cache
   end
 
   def put(object_id, data)
+    puts "LOG: Cache write at #{Time.now.to_ms}"
     @s3_bucket.objects[object_id].write(data)
   end
 
