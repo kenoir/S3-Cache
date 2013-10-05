@@ -10,14 +10,20 @@ class S3Cache
   end
 
   def get(object_id)
+    puts "LOG: Cache read for #{object_id} at #{Time.now.to_ms}"
     @s3_bucket.objects[object_id].read
   end
 
+  def last_updated(object_id)
+    puts "LOG: Getting last updated for #{object_id} at #{Time.now.to_ms}"
+    @s3_bucket.objects[object_id].metadata['last_updated']
+  end
+
   def put(object_id, data)
-    puts "LOG: Cache write at #{Time.now.to_ms}"
+    puts "LOG: Cache write for #{object_id} at #{Time.now.to_ms}"
     @s3_bucket.objects[object_id].write(data)
+    @s3_bucket.objects[object_id].metadata['last_updated'] = Time.now.to_ms
   end
 
 end
-
 
