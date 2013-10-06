@@ -1,7 +1,7 @@
 require './models/s3_cache'
 require './models/news_resource'
 
-class NewsService
+class NewsServiceUnthreaded
 
   class ::Time
     def to_ms
@@ -20,10 +20,8 @@ class NewsService
       cached_data = @cache.get(id)
 
       if(stale? id)
-        Thread.new do
-          resource = NewsResource.new(id)
-          @cache.put(id,resource.render)
-        end
+        resource = NewsResource.new(id)
+        @cache.put(id,resource.render)
       end
 
       return render(cached_data, "cached")
@@ -32,9 +30,7 @@ class NewsService
     end
 
     resource = NewsResource.new(id)
-    Thread.new do
-      @cache.put(id,resource.render)
-    end
+    @cache.put(id,resource.render)
 
     render(resource.render, "uncached")
   end
