@@ -4,7 +4,6 @@ gem 'json'
 gem 'rest-client'
 gem 'sinatra'
 gem 'bundler'
-gem 'warbler'
 gem 'rake'
 gem "rubyzip", "<1.0.0"
 gem 'aws-sdk', '~> 1.0'
