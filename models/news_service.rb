@@ -29,8 +29,8 @@ class NewsService
       return render(cached_data, "cached")
     rescue AWS::S3::Errors::NoSuchKey
       puts "LOG: No cache found for #{id}"
-    rescue
-      puts "LOG: Something else went wrong ...."
+    rescue Exception => e
+      puts "LOG: #{puts e.message}"
     end
 
     resource = NewsResource.new(id)
