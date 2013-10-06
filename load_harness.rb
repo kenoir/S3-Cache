@@ -3,10 +3,10 @@ require './config'
 require './models/news_service'
 require './models/news_service_unthreaded'
 
-CACHE_EXPIRE_AFTER_MS = 1000
+CACHE_EXPIRE_AFTER_MS = 0
 STORY_ID = 'uk-24411075'
 
-num_tests = 50
+num_tests = 100
 tasks = {
   :threaded => Proc.new {
     news = NewsService.new
